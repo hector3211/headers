@@ -1,0 +1,38 @@
+---
+import { Button } from "./ui/button";
+import { Image } from "astro:assets";
+import Headphone from "@/assets/headphone-hero.jpg"
+
+
+---
+ <div class="">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+        <div class="flex flex-col lg:flex-row items-center justify-center lg:gap-x-4">
+          <div class="max-w-xl">
+            <h1 class="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
+              Immerse Yourself in Sound
+            </h1>
+            <p class="mt-6 max-w-xl text-xl">
+              Discover our premium collection of headphones. From noise-cancelling to wireless, find your perfect audio companion.
+            </p>
+            <div class="mt-10 flex gap-4">
+              <Button size="lg" className="">
+                Shop Headphones
+              </Button>
+              <Button size="lg" variant="outline" >
+                View Deals
+              </Button>
+            </div>
+          </div>
+          <div class="hidden md:block">
+            <Image
+            src={Headphone}
+              alt="Premium Headphones"
+              width={640}
+              height={959}
+              class="rounded-lg shadow-2xl w-[450px] h-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </div>

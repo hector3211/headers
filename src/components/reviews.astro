@@ -1,0 +1,59 @@
+---
+import { Image } from "astro:assets";
+import { Star } from 'lucide-astro'
+
+const reviews = [
+  {
+    id: 1,
+    name: "Alex Johnson",
+    avatar: "/placeholder.svg?height=60&width=60",
+    review: "These headphones are amazing! The sound quality is top-notch and they're so comfortable.",
+    rating: 5,
+    product: "Noise-Cancelling Wireless Headphones"
+  },
+  {
+    id: 2,
+    name: "Sam Lee",
+    avatar: "/placeholder.svg?height=60&width=60",
+    review: "Great for workouts. They stay in place and the sound motivates me to push harder.",
+    rating: 4,
+    product: "Sports In-Ear Headphones"
+  },
+  {
+    id: 3,
+    name: "Emily Chen",
+    avatar: "/placeholder.svg?height=60&width=60",
+    review: "The studio quality is unmatched. Perfect for my home recording sessions.",
+    rating: 5,
+    product: "Studio-Quality Over-Ear Headphones"
+  }
+]
+---
+
+
+<section class="bg-white py-12 md:py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-extrabold text-gray-900 text-center mb-12">What Our Customers Say</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {reviews.map((review) => (
+            <div class="bg-gray-50 rounded-lg p-6 shadow-sm">
+              <div class="flex items-center mb-4">
+                <Image src={review.avatar} alt={review.name} width={60} height={60} class="rounded-full mr-4" />
+                <div>
+                  <h3 class="font-semibold text-lg">{review.name}</h3>
+                  <div class="flex">
+                    {[...Array(5)].map((_, i) => (
+                      <Star class={`h-5 w-5 ${i < review.rating ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" />
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <p class="text-gray-600 mb-2">"{review.review}"</p>
+              <p class="text-sm text-gray-500">on {review.product}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+

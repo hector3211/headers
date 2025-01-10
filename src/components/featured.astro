@@ -1,0 +1,43 @@
+---
+import { Image } from "astro:assets"
+import AddToCartButton from "@/components/add-cart-button.tsx"
+import { Card,CardTitle,CardHeader,CardDescription,CardContent,CardFooter } from "./ui/card";
+import ProductImage from "@/assets/headphone-two.png"
+import type { ImageMetadata } from "astro";
+
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  src: ImageMetadata;
+}
+
+const products: Product[] = [
+  { id: 1, name: "Noise-Cancelling Wireless Headphones", price: 299.99, src: ProductImage },
+  { id: 2, name: "Sports In-Ear Headphones", price: 129.99, src: ProductImage },
+  { id: 3, name: "Studio-Quality Over-Ear Headphones", price: 349.99, src: ProductImage },
+  { id: 4, name: "True Latest Wireless Technology Earbuds", price: 179.99, src: ProductImage },
+]
+---
+
+<section class="bg-gray-100 py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Featured Headphones</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {products.map((product) => (
+          <Card className="bg-transparent border-none shadow-none">
+                <CardHeader>
+                    <CardTitle>{product.name}</CardTitle>
+                    <CardDescription>{product.price.toFixed(2)}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <Image src={product.src} alt={product.name} width={900} height={900} class="w-[900px] h-auto object-cover" />
+                </CardContent>
+                <CardFooter>
+                    <AddToCartButton id={product.id}/>
+                </CardFooter>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </section>
