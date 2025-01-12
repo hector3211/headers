@@ -2,27 +2,51 @@
 import { Image } from "astro:assets"
 import AddToCartButton from "@/components/add-cart-button.tsx"
 import { Card,CardTitle,CardHeader,CardDescription,CardContent,CardFooter } from "./ui/card";
-import ProductImage from "@/assets/headphone-two.png"
+import HeadPhone from "@/assets/headphone-two.png"
+import Cables from "@/assets/cables.avif";
+import MousePad from "@/assets/mousepad.avif";
+import type { Product } from "@/lib/models";
 import type { ImageMetadata } from "astro";
 
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  src: ImageMetadata;
-}
-
 const products: Product[] = [
-  { id: 1, name: "Noise-Cancelling Wireless Headphones", price: 299.99, src: ProductImage },
-  { id: 2, name: "Sports In-Ear Headphones", price: 129.99, src: ProductImage },
-  { id: 3, name: "Studio-Quality Over-Ear Headphones", price: 349.99, src: ProductImage },
-  { id: 4, name: "True Latest Wireless Technology Earbuds", price: 179.99, src: ProductImage },
+  {
+    id: "1",
+    name: "AudioPhile Pro",
+    category: "Over-Ear",
+    price: 299.99,
+    rating: 4,
+    src: HeadPhone,
+  },
+    {
+        id: "9",
+        name: "UltraFast USB-C",
+        category: "New",
+        price: 19.99,
+        rating: 5,
+        src: Cables,
+    },
+  {
+    id: "7",
+    name: "GamerX Pro",
+    category: "Wireless",
+    price: 279.99,
+    rating: 5,
+    src: HeadPhone,
+  },
+  {
+    id: "12",
+    name: "ComfortMouse Pad XL",
+    category: "Mousepads",
+    price: 39.99,
+    rating: 5,
+    src: MousePad,
+  },
 ]
 ---
 
 <section class="bg-gray-100 py-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Featured Headphones</h2>
+        <h2 class="text-3xl font-extrabold text-gray-900 mb-6">Featured Products</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {products.map((product) => (
           <Card className="bg-transparent border-none shadow-none">
@@ -31,10 +55,10 @@ const products: Product[] = [
                     <CardDescription>{product.price.toFixed(2)}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <Image src={product.src} alt={product.name} width={900} height={900} class="w-[900px] h-auto object-cover" />
+                    <Image src={product.src as ImageMetadata} alt={product.name} width={900} height={900} class="w-[900px] h-auto object-cover" />
                 </CardContent>
                 <CardFooter>
-                    <AddToCartButton id={product.id}/>
+                    <AddToCartButton product={{...product, quantity: 1}} client:load/>
                 </CardFooter>
             </Card>
           ))}

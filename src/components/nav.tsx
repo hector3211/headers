@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, User } from "lucide-react";
+import { useStore } from "@nanostores/react";
+import { shoppingCart } from "@/stores/cart-store";
 
 const Links = [
   {
@@ -21,6 +23,7 @@ const Links = [
 
 export default function Nav() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const $cartItems = useStore(shoppingCart);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,9 +33,7 @@ export default function Nav() {
         setIsScrolled(false);
       }
     };
-
     window.addEventListener("scroll", handleScroll);
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
@@ -57,7 +58,7 @@ export default function Nav() {
                 {Links.map((item, idx) => (
                   <a
                     key={idx}
-                    href={`/products?catagory=${item.catagory}`}
+                    href={`/products?category=${item.catagory}`}
                     className={`px-3 py-2 rounded-md text-sm font-medium ${
                       isScrolled
                         ? "text-gray-600 hover:text-primary"
@@ -86,7 +87,7 @@ export default function Nav() {
                 className={isScrolled ? "text-gray-600" : ""}
               >
                 <ShoppingCart className="h-5 w-5" />
-                <span className="sr-only">Shopping cart</span>
+                <span className="size-4">{$cartItems.length}</span>
               </Button>
             </a>
           </div>

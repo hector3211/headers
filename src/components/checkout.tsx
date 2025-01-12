@@ -21,15 +21,6 @@ const product = {
   image: "/placeholder.svg?height=100&width=100",
 };
 
-interface Product {
-  id: string;
-  name: string;
-  category: string;
-  price: number;
-  rating: number;
-  imageUrl: string;
-}
-
 export default function CheckoutPage() {
   const [shippingCost, setShippingCost] = useState(10);
 
