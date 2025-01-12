@@ -4,6 +4,21 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, User } from "lucide-react";
 
+const Links = [
+  {
+    title: "Headphones",
+    catagory: "headphone",
+  },
+  {
+    title: "Cables",
+    catagory: "cables",
+  },
+  {
+    title: "Accessories",
+    catagory: "accessories",
+  },
+];
+
 export default function Nav() {
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -39,21 +54,19 @@ export default function Nav() {
             </a>
             <div className="hidden md:block ml-10">
               <div className="flex items-baseline space-x-4">
-                {["All", "Wireless", "Over-Ear", "In-Ear", "Accessories"].map(
-                  (item) => (
-                    <a
-                      key={item}
-                      href={`/products?headphone=${item}`}
-                      className={`px-3 py-2 rounded-md text-sm font-medium ${
-                        isScrolled
-                          ? "text-gray-600 hover:text-primary"
-                          : "text-gray-500 hover:text-white hover:bg-gray-700"
-                      }`}
-                    >
-                      {item === "All" ? "Products" : item}
-                    </a>
-                  ),
-                )}
+                {Links.map((item, idx) => (
+                  <a
+                    key={idx}
+                    href={`/products?catagory=${item.catagory}`}
+                    className={`px-3 py-2 rounded-md text-sm font-medium ${
+                      isScrolled
+                        ? "text-gray-600 hover:text-primary"
+                        : "text-gray-500 hover:text-white hover:bg-gray-700"
+                    }`}
+                  >
+                    {item.title}
+                  </a>
+                ))}
               </div>
             </div>
           </div>
@@ -66,14 +79,16 @@ export default function Nav() {
               <User className="h-5 w-5" />
               <span className="sr-only">User account</span>
             </Button>
-            <Button
-              variant="ghost"
-              size="icon"
-              className={isScrolled ? "text-gray-600" : ""}
-            >
-              <ShoppingCart className="h-5 w-5" />
-              <span className="sr-only">Shopping cart</span>
-            </Button>
+            <a href="/cart">
+              <Button
+                variant="ghost"
+                size="icon"
+                className={isScrolled ? "text-gray-600" : ""}
+              >
+                <ShoppingCart className="h-5 w-5" />
+                <span className="sr-only">Shopping cart</span>
+              </Button>
+            </a>
           </div>
         </div>
       </div>

@@ -4,8 +4,26 @@ import { useEffect, useState } from "react";
 import ProductCard from "@/components/product-card";
 import { Search } from "lucide-react";
 import HeadPhone from "@/assets/headphone-two.png";
+import Cables from "@/assets/cables.avif";
+import MousePad from "@/assets/mousepad.avif";
 
-const headphones = [
+const categories = [
+  {
+    name: "headphone",
+    subCategories: ["All", "Wireless", "Over-Ear", "On-Ear", "In-Ear"],
+  },
+  {
+    name: "cables",
+    subCategories: ["All", "New", "Sale"],
+  },
+  {
+    name: "accessories",
+    subCategories: ["All", "Mousepads", "Mice", "Mouseskates"],
+  },
+];
+
+const products = [
+  // Headphones
   {
     id: "1",
     name: "AudioPhile Pro",
@@ -70,57 +88,153 @@ const headphones = [
     rating: 4,
     imageUrl: HeadPhone.src,
   },
-];
 
-const categories = ["All", "Wireless", "Over-Ear", "On-Ear", "In-Ear"];
+  // Cables
+  {
+    id: "9",
+    name: "UltraFast USB-C",
+    category: "New",
+    price: 19.99,
+    rating: 5,
+    imageUrl: Cables.src,
+  },
+  {
+    id: "10",
+    name: "HDMI Pro 4K",
+    category: "New",
+    price: 29.99,
+    rating: 4,
+    imageUrl: Cables.src,
+  },
+  {
+    id: "11",
+    name: "Lightning Speed Cable",
+    category: "Sale",
+    price: 24.99,
+    rating: 4,
+    imageUrl: Cables.src,
+  },
+
+  // Accessories
+  {
+    id: "12",
+    name: "ComfortMouse Pad XL",
+    category: "Mousepads",
+    price: 39.99,
+    rating: 5,
+    imageUrl: MousePad.src,
+  },
+  {
+    id: "13",
+    name: "ErgoMouse Pro",
+    category: "Mice",
+    price: 59.99,
+    rating: 5,
+    imageUrl: MousePad.src,
+  },
+  {
+    id: "14",
+    name: "Precision Mouse Skates",
+    category: "Mouseskates",
+    price: 14.99,
+    rating: 4,
+    imageUrl: MousePad.src,
+  },
+];
 
 export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+  const [activeMainCategory, setActiveMainCategory] = useState("headphone");
 
   useEffect(() => {
-    // Only run on client-side
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
-      const type = params.get("headphone");
-      setSelectedCategory(type ?? "All");
+      const category = params.get("category");
+      const filter = params.get("filter");
+
+      if (category) {
+        setActiveMainCategory(category);
+      }
+      if (filter) {
+        setSelectedCategory(filter);
+      }
     }
-  }, [selectedCategory]);
-  // console.log(`params: ${JSON.stringify(selectedCategory)}`);
+  }, []);
 
-  const filteredHeadphones = headphones.filter(
-    (headphone) =>
-      (selectedCategory === "All" || headphone.category === selectedCategory) &&
-      headphone.name.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
-
-  const updateQueryParam = (newType: string) => {
+  const updateURL = (mainCategory: string, filter: string = "All") => {
     const params = new URLSearchParams(window.location.search);
-    params.set("headphone", newType);
+
+    params.set("category", mainCategory);
+    if (filter !== "All") {
+      params.set("filter", filter);
+    } else {
+      params.delete("filter");
+    }
     const newUrl = `${window.location.pathname}?${params.toString()}`;
     window.history.pushState({}, "", newUrl);
-    setSelectedCategory(newType);
+    setActiveMainCategory(mainCategory);
+    setSelectedCategory(filter);
   };
+
+  const filteredProducts = products.filter((product) => {
+    const matchesSearch = product.name
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase());
+
+    const matchesMainCategory = categories
+      .find((cat) => cat.name === activeMainCategory)
+      ?.subCategories.includes(product.category);
+
+    const matchesSubCategory =
+      selectedCategory === "All" || product.category === selectedCategory;
+
+    return matchesSearch && matchesMainCategory && matchesSubCategory;
+  });
+
+  const currentCategories =
+    categories.find((cat) => cat.name === activeMainCategory)?.subCategories ||
+    [];
 
   return (
     <div className="container mx-auto px-4 py-8 pt-32">
-      <h1 className="text-3xl font-bold text-black mb-8">Headphone Catalog</h1>
+      <h1 className="text-3xl font-bold text-black mb-8">Product Catalog</h1>
 
       <div className="flex flex-col md:flex-row justify-between items-center mb-8">
         <div className="flex space-x-4 mb-4 md:mb-0">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => updateQueryParam(category)}
-              className={`px-4 py-2 rounded-full ${
-                selectedCategory === category
-                  ? "bg-black text-white"
-                  : "bg-gray-200 text-black hover:bg-gray-300"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
+          <div className="flex flex-col space-y-6">
+            <div>
+              {categories.map((category) => (
+                <button
+                  key={category.name}
+                  onClick={() => updateURL(category.name)}
+                  className={`px-4 py-2 rounded-full ${
+                    activeMainCategory === category.name
+                      ? "bg-black text-white"
+                      : "bg-gray-200 text-black hover:bg-gray-300"
+                  }`}
+                >
+                  {category.name.charAt(0).toUpperCase() +
+                    category.name.slice(1)}
+                </button>
+              ))}
+            </div>
+            <div>
+              {currentCategories.map((subCategory) => (
+                <button
+                  key={subCategory}
+                  onClick={() => updateURL(activeMainCategory, subCategory)}
+                  className={`px-4 py-2 rounded-full whitespace-nowrap ${
+                    selectedCategory === subCategory
+                      ? "bg-black text-white"
+                      : "bg-gray-200 text-black hover:bg-gray-300"
+                  }`}
+                >
+                  {subCategory}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
         <div className="relative">
           <input
@@ -135,12 +249,12 @@ export default function Products() {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {filteredHeadphones.map((headphone) => (
-          <ProductCard key={headphone.id} {...headphone} />
+        {filteredProducts.map((product) => (
+          <ProductCard key={product.id} {...product} />
         ))}
       </div>
 
-      {filteredHeadphones.length === 0 && (
+      {filteredProducts.length === 0 && (
         <p className="text-center text-gray-600 mt-8">
           No headphones found matching your criteria. {selectedCategory}
         </p>
