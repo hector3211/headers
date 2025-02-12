@@ -1,14 +1,14 @@
 ---
 import Layout from '@/layouts/Layout.astro';
-import Hero from "@/components/hero.astro"
+import Hero from "@/components/hero.tsx"
 import Featured from "@/components/featured.astro"
-import About from '@/components/about.astro';
+import Features from "@/components/features.tsx"
 import Reviews from '@/components/reviews.astro';
 ---
 
 <Layout>
-    <Hero/>
+    <Hero client:load/>
     <Featured/>
-    <About/>
+    <Features client:visible/>
     <Reviews/>
 </Layout>

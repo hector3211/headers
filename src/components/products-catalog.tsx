@@ -6,6 +6,7 @@ import { Search } from "lucide-react";
 import HeadPhone from "@/assets/headphone-two.png";
 import Cables from "@/assets/cables.avif";
 import MousePad from "@/assets/mousepad.avif";
+import { Button } from "./ui/button";
 
 const categories = [
   {
@@ -24,15 +25,15 @@ const categories = [
   },
   {
     name: "headphone",
-    subCategories: ["All", "Wireless", "Over-Ear", "On-Ear", "In-Ear"],
+    subCategories: ["Wireless", "Over-Ear", "On-Ear", "In-Ear"],
   },
   {
     name: "cables",
-    subCategories: ["All", "New", "Sale"],
+    subCategories: ["New", "Sale"],
   },
   {
     name: "accessories",
-    subCategories: ["All", "Mousepads", "Mice", "Mouseskates"],
+    subCategories: ["Mousepads", "Mice", "Mouseskates"],
   },
 ];
 
@@ -248,33 +249,36 @@ export default function Products() {
           <div className="flex flex-col space-y-6">
             <div>
               {categories.map((category) => (
-                <button
+                <Button
+                  variant={"outline"}
                   key={category.name}
                   onClick={() => updateURL(category.name)}
                   className={`px-4 py-2 rounded-full ${
                     activeMainCategory === category.name
-                      ? "bg-black text-white"
+                      ? "bg-lime-500 hover:bg-lime-500/90"
                       : "bg-gray-200 text-black hover:bg-gray-300"
                   }`}
                 >
                   {category.name.charAt(0).toUpperCase() +
                     category.name.slice(1)}
-                </button>
+                </Button>
               ))}
             </div>
             <div>
               {currentCategories.map((subCategory) => (
-                <button
+                <Button
+                  size={"sm"}
+                  variant={"outline"}
                   key={subCategory}
                   onClick={() => updateURL(activeMainCategory, subCategory)}
                   className={`px-4 py-2 rounded-full whitespace-nowrap ${
                     selectedCategory.includes(subCategory)
-                      ? "bg-black text-white"
+                      ? "bg-lime-500  hover:bg-lime-500/90"
                       : "bg-gray-200 text-black hover:bg-gray-300"
                   }`}
                 >
                   {subCategory}
-                </button>
+                </Button>
               ))}
             </div>
           </div>

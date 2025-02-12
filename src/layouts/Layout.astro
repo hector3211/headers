@@ -1,6 +1,7 @@
 ---
 import '@/styles/globals.css'
 import Nav from "@/components/nav.tsx"
+import { Toaster } from '@/components/ui/sonner'
 ---
 
 
@@ -16,6 +17,7 @@ import Nav from "@/components/nav.tsx"
 	<body class="max-w-full relative">
         <Nav client:load/>
 		<slot />
+        <Toaster client:load/>
 	</body>
 </html>
 

@@ -14,8 +14,8 @@ const Links = [
   },
   {
     title: "Products",
-    catagory: "headphone",
-    filter: "",
+    catagory: "All",
+    filter: "All",
   },
   {
     title: "Sale",
