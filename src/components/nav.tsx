@@ -8,16 +8,19 @@ import { shoppingCart } from "@/stores/cart-store";
 
 const Links = [
   {
-    title: "Headphones",
+    title: "What's New",
+    catagory: "All",
+    filter: "New",
+  },
+  {
+    title: "Products",
     catagory: "headphone",
+    filter: "",
   },
   {
-    title: "Cables",
-    catagory: "cables",
-  },
-  {
-    title: "Accessories",
-    catagory: "accessories",
+    title: "Sale",
+    catagory: "All",
+    filter: "Sale",
   },
 ];
 
@@ -55,19 +58,21 @@ export default function Nav() {
             </a>
             <div className="hidden md:block ml-10">
               <div className="flex items-baseline space-x-4">
-                {Links.map((item, idx) => (
-                  <a
-                    key={idx}
-                    href={`/products?category=${item.catagory}`}
-                    className={`px-3 py-2 rounded-md text-sm font-medium ${
-                      isScrolled
-                        ? "text-gray-600 hover:text-primary"
-                        : "text-gray-500 hover:text-white hover:bg-gray-700"
-                    }`}
-                  >
-                    {item.title}
-                  </a>
-                ))}
+                {Links.map((item, idx) => {
+                  return (
+                    <a
+                      key={idx}
+                      href={`/products?category=${item.catagory}${item.filter && `&filter=${item.filter}`}`}
+                      className={`px-3 py-2 rounded-md text-sm font-medium ${
+                        isScrolled
+                          ? "text-gray-600 hover:text-primary"
+                          : "text-gray-500 hover:text-white hover:bg-gray-700"
+                      }`}
+                    >
+                      {item.title}
+                    </a>
+                  );
+                })}
               </div>
             </div>
           </div>

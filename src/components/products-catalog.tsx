@@ -9,6 +9,20 @@ import MousePad from "@/assets/mousepad.avif";
 
 const categories = [
   {
+    name: "All",
+    subCategories: [
+      "New",
+      "Sale",
+      "Wireless",
+      "Over-Ear",
+      "On-Ear",
+      "In-Ear",
+      "Mousepads",
+      "Mice",
+      "Mouseskates",
+    ],
+  },
+  {
     name: "headphone",
     subCategories: ["All", "Wireless", "Over-Ear", "On-Ear", "In-Ear"],
   },
@@ -143,7 +157,7 @@ const products = [
 ];
 
 export default function Products() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [activeMainCategory, setActiveMainCategory] = useState("headphone");
 
@@ -151,7 +165,7 @@ export default function Products() {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       const category = params.get("category");
-      const filter = params.get("filter");
+      const filter = params.getAll("filter");
 
       if (category) {
         setActiveMainCategory(category);
@@ -164,17 +178,45 @@ export default function Products() {
 
   const updateURL = (mainCategory: string, filter: string = "All") => {
     const params = new URLSearchParams(window.location.search);
+    const paramsSize = params.getAll("filter").length;
+    console.log(`size of params BEFORE: ${paramsSize}`);
+
+    if (activeMainCategory === mainCategory) {
+      // sub category
+      if (selectedCategory.includes(filter)) {
+        if (paramsSize === 1) {
+          params.set("filter", "All");
+          setSelectedCategory(["All"]);
+        } else {
+          const updatedFilters = selectedCategory.filter(
+            (item) => item !== filter,
+          );
+          params.delete("filter"); // Clear all filters first
+          updatedFilters.forEach((item) => params.append("filter", item));
+          setSelectedCategory(updatedFilters);
+        }
+        const newUrl = `${window.location.pathname}?${params.toString()}`;
+        window.history.pushState({}, "", newUrl);
+        console.log(`size of params: ${paramsSize}`);
+        return;
+      }
+    }
 
     params.set("category", mainCategory);
+    setActiveMainCategory(mainCategory);
     if (filter !== "All") {
-      params.set("filter", filter);
-    } else {
       params.delete("filter");
+      const updatedFlters = selectedCategory.includes("All")
+        ? [filter]
+        : [...selectedCategory, filter];
+      updatedFlters.forEach((item) => params.append("filter", item));
+      setSelectedCategory(updatedFlters);
+    } else {
+      params.set("filter", "All");
+      setSelectedCategory(["All"]);
     }
     const newUrl = `${window.location.pathname}?${params.toString()}`;
     window.history.pushState({}, "", newUrl);
-    setActiveMainCategory(mainCategory);
-    setSelectedCategory(filter);
   };
 
   const filteredProducts = products.filter((product) => {
@@ -187,7 +229,8 @@ export default function Products() {
       ?.subCategories.includes(product.category);
 
     const matchesSubCategory =
-      selectedCategory === "All" || product.category === selectedCategory;
+      selectedCategory.includes("All") ||
+      selectedCategory.includes(product.category);
 
     return matchesSearch && matchesMainCategory && matchesSubCategory;
   });
@@ -200,7 +243,7 @@ export default function Products() {
     <div className="container mx-auto px-4 py-8 pt-32">
       <h1 className="text-3xl font-bold text-black mb-8">Product Catalog</h1>
 
-      <div className="flex flex-col md:flex-row justify-between items-center mb-8">
+      <div className="flex flex-col md:flex-row justify-between items-start mb-8">
         <div className="flex space-x-4 mb-4 md:mb-0">
           <div className="flex flex-col space-y-6">
             <div>
@@ -225,7 +268,7 @@ export default function Products() {
                   key={subCategory}
                   onClick={() => updateURL(activeMainCategory, subCategory)}
                   className={`px-4 py-2 rounded-full whitespace-nowrap ${
-                    selectedCategory === subCategory
+                    selectedCategory.includes(subCategory)
                       ? "bg-black text-white"
                       : "bg-gray-200 text-black hover:bg-gray-300"
                   }`}
@@ -239,10 +282,10 @@ export default function Products() {
         <div className="relative">
           <input
             type="text"
-            placeholder="Search headphones..."
+            placeholder="Search products..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 pr-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-black"
+            className="pl-10 pr-4 lg:min-w-[350px] py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-black"
           />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
         </div>
