@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import Headphone from "@/assets/headphone-hero.jpg";
+import HeroImg from "@/assets/headphone-hero.jpg";
 
 export default function Hero() {
   return (
@@ -10,7 +10,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9, ease: "easeOut" }}
+          transition={{ duration: 1, ease: "easeInOut" }}
           className="max-w-xl text-center lg:text-left"
         >
           <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-gray-900">
@@ -41,21 +41,16 @@ export default function Hero() {
         </motion.div>
 
         {/* Right Image */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
-          className="hidden md:block"
-        >
+        <div className="hidden md:block">
           <img
-            src={Headphone.src}
+            src={HeroImg.src}
             alt="Premium Headphones"
             width={450}
             height={600}
             className="rounded-xl shadow-2xl"
             loading="eager"
           />
-        </motion.div>
+        </div>
       </div>
     </section>
   );

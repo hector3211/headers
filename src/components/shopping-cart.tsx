@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,35 +8,23 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { Headphones, Minus, Plus, Trash2 } from "lucide-react";
-
-// Mock cart data
-const initialCartItems = [
-  { id: 1, name: "Premium Wireless Headphones", price: 199.99, quantity: 1 },
-  { id: 2, name: "Noise-Cancelling Earbuds", price: 149.99, quantity: 2 },
-  { id: 3, name: "Studio Monitor Headphones", price: 299.99, quantity: 1 },
-];
+import { Minus, Plus, Trash2 } from "lucide-react";
+import {
+  shoppingCart,
+  addItemToCart,
+  removeItemFromCart,
+} from "@/stores/cart-store";
+import { useStore } from "@nanostores/react";
 
 export default function ShoppingCart() {
-  const [cartItems, setCartItems] = useState(initialCartItems);
+  const $cartItems = useStore(shoppingCart);
 
-  const updateQuantity = (id: number, change: number) => {
-    setCartItems((items) =>
-      items
-        .map((item) =>
-          item.id === id
-            ? { ...item, quantity: Math.max(0, item.quantity + change) }
-            : item,
-        )
-        .filter((item) => item.quantity > 0),
-    );
+  const updateQuantity = (id: string) => {
+    const item = $cartItems.filter((item) => item.id === id);
+    addItemToCart(item[0]!); // yikes
   };
 
-  const removeItem = (id: number) => {
-    setCartItems((items) => items.filter((item) => item.id !== id));
-  };
-
-  const subtotal = cartItems.reduce(
+  const subtotal = $cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0,
   );
@@ -53,64 +40,67 @@ export default function ShoppingCart() {
             <CardTitle>Cart Items</CardTitle>
           </CardHeader>
           <CardContent>
-            {cartItems.length === 0 ? (
+            {$cartItems.length === 0 ? (
               <p className="text-center text-gray-500">Your cart is empty</p>
             ) : (
               <ul className="space-y-4">
-                {cartItems.map((item) => (
-                  <li key={item.id} className="flex items-center space-x-4">
-                    <div className="bg-gray-100 p-2 rounded-md">
-                      <Headphones className="h-12 w-12 text-gray-600" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold">{item.name}</h3>
-                      <p className="text-sm text-gray-500">
-                        ${item.price.toFixed(2)}
-                      </p>
-                    </div>
-                    <div className="flex items-center space-x-2">
+                {$cartItems.map((item) => {
+                  const imageUrl =
+                    typeof item.src === "string" ? item.src : item.src.src;
+                  return (
+                    <li key={item.id} className="flex items-center space-x-4">
+                      <div>
+                        <img
+                          src={imageUrl}
+                          alt={`${item.name} image`}
+                          className="rounded-md w-44"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-semibold">{item.name}</h3>
+                        <p className="text-sm text-gray-500">
+                          ${item.price.toFixed(2)}
+                        </p>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          onClick={() => removeItemFromCart(item.id)}
+                          aria-label="Decrease quantity"
+                        >
+                          <Minus className="h-4 w-4" />
+                        </Button>
+                        <Input
+                          type="number"
+                          value={item.quantity}
+                          onChange={() => updateQuantity(item.id)}
+                          className="w-16 text-center"
+                          min="1"
+                        />
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          onClick={() => updateQuantity(item.id)}
+                          aria-label="Increase quantity"
+                        >
+                          <Plus className="h-4 w-4" />
+                        </Button>
+                      </div>
+                      <div className="font-semibold">
+                        ${(item.price * item.quantity).toFixed(2)}
+                      </div>
                       <Button
-                        variant="outline"
+                        variant="ghost"
                         size="icon"
-                        onClick={() => updateQuantity(item.id, -1)}
-                        aria-label="Decrease quantity"
+                        onClick={() => removeItemFromCart(item.id)}
+                        aria-label="Remove item"
                       >
-                        <Minus className="h-4 w-4" />
+                        <Trash2 className="h-4 w-4" />
                       </Button>
-                      <Input
-                        type="number"
-                        value={item.quantity}
-                        onChange={(e) =>
-                          updateQuantity(
-                            item.id,
-                            parseInt(e.target.value) - item.quantity,
-                          )
-                        }
-                        className="w-16 text-center"
-                        min="1"
-                      />
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        onClick={() => updateQuantity(item.id, 1)}
-                        aria-label="Increase quantity"
-                      >
-                        <Plus className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    <div className="font-semibold">
-                      ${(item.price * item.quantity).toFixed(2)}
-                    </div>
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => removeItem(item.id)}
-                      aria-label="Remove item"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  </li>
-                ))}
+                    </li>
+                  );
+                })}
               </ul>
             )}
           </CardContent>

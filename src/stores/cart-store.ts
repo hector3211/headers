@@ -1,15 +1,28 @@
-import { atom } from "nanostores";
+import { atom, onMount } from "nanostores";
 
 export const isCartOpen = atom(false);
 
 export type CartItem = {
   id: string;
+  name: string;
   price: number;
   quantity: number;
   src: ImageMetadata | string;
 };
 
 export const shoppingCart = atom<CartItem[]>([]);
+
+onMount(shoppingCart, () => {
+  const savedCart = localStorage.getItem("shoppingCart");
+  if (savedCart) {
+    shoppingCart.set(JSON.parse(savedCart));
+  }
+
+  // Sync changes to localStorage
+  shoppingCart.subscribe((cart) => {
+    localStorage.setItem("shoppingCart", JSON.stringify(cart));
+  });
+});
 
 export function addItemToCart(product: CartItem) {
   const currentCart = shoppingCart.get();

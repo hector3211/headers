@@ -91,8 +91,12 @@ export default function Nav() {
                 size="icon"
                 className={isScrolled ? "text-gray-600" : ""}
               >
-                <ShoppingCart className="h-5 w-5" />
-                <span className="size-4">{$cartItems.length}</span>
+                <ShoppingCart className="size-5" />
+                <span
+                  className={`size-4 ${$cartItems.length && "text-destructive"}`}
+                >
+                  {$cartItems.length}
+                </span>
               </Button>
             </a>
           </div>
