@@ -2,13 +2,45 @@
 import Layout from '@/layouts/Layout.astro';
 import Hero from "@/components/hero.tsx"
 import Featured from "@/components/featured.astro"
-import Features from "@/components/features.tsx"
-import Reviews from '@/components/reviews.astro';
+import { Button } from '@/components/ui/button';
+import { MoveUpRight } from 'lucide-react';
+import { Image } from "astro:assets";
+import KeyOne from "@/assets/keyboard-one.jpg"
+import KeyHero from "@/assets/keyboard-hero.jpg"
 ---
 
 <Layout>
     <Hero client:load/>
     <Featured/>
-    <Features client:visible/>
-    <Reviews/>
+    <div class="flex flex-col lg:flex-row">
+        <div class="relative min-h-[20rem] max-w-xl bg-gary-300">
+            <Image width={1200} height={900} src={KeyOne} alt={"index page image"} class={"relative mx-auto z-10 w-full object-contain"}/>
+            <div class="z-20 absolute top-[60%] left-[10%] flex flex-col space-y-3">
+                <span>
+                    <h1 class="text-[60px] font-extrabold">DLX keyboards</h1>
+                    <h3 class="text-foreground/90 font-light">Check out our new DLX keyboards</h3>
+                </span>
+                <span class="flex items-center">
+                    <Button>
+                        Shop DLX
+                        <MoveUpRight/>
+                    </Button>
+                </span>
+            </div>
+        </div>
+        <div class="relative min-h-[20rem] flex-1 bg-gary-300">
+            <Image width={1200} height={900} src={KeyHero} alt={"index page image"} class={"relative mx-auto min-h-[36rem] z-10 w-full object-cover"}/>
+            <div class="z-20 absolute top-[20%] left-[10%] flex flex-col space-y-3">
+                <span class="text-zinc-300">
+                    <h1 class="text-[60px] font-extrabold">DLX Collection</h1>
+                    <h3 class="text-zinc-300 font-light">Check out our new DLX keyboards</h3>
+                </span>
+                <span class="flex items-center">
+                    <Button variant={"secondary"}>
+                        Checkout Collection
+                    </Button>
+                </span>
+            </div>
+        </div>
+    </div>
 </Layout>

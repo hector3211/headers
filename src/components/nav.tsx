@@ -54,7 +54,11 @@ export default function Nav() {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <a href="/" className="flex-shrink-0">
-              <span className={`text-2xl font-bold text-primary`}>Headers</span>
+              <span
+                className={`text-4xl font-bold tracking-tighter text-primary`}
+              >
+                Headers
+              </span>
             </a>
             <div className="hidden md:block ml-10">
               <div className="flex items-baseline space-x-4">
@@ -65,8 +69,8 @@ export default function Nav() {
                       href={`/products?category=${item.catagory}${item.filter && `&filter=${item.filter}`}`}
                       className={`px-3 py-2 rounded-md text-sm font-medium ${
                         isScrolled
-                          ? "text-gray-600 hover:text-primary"
-                          : "text-gray-500 hover:text-white hover:bg-gray-700"
+                          ? "text-zinc-600 hover:text-primary"
+                          : "text-zinc-500 hover:text-white hover:bg-zinc-700"
                       }`}
                     >
                       {item.title}
@@ -80,7 +84,7 @@ export default function Nav() {
             <Button
               variant="ghost"
               size="icon"
-              className={`mr-2 ${isScrolled ? "text-gray-600" : ""}`}
+              className={`mr-2 ${isScrolled ? "text-zinc-600" : ""}`}
             >
               <User className="h-5 w-5" />
               <span className="sr-only">User account</span>
@@ -89,7 +93,7 @@ export default function Nav() {
               <Button
                 variant="ghost"
                 size="icon"
-                className={isScrolled ? "text-gray-600" : ""}
+                className={isScrolled ? "text-zinc-600" : ""}
               >
                 <ShoppingCart className="size-5" />
                 <span

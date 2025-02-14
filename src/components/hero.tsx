@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import HeroImg from "@/assets/headphone-hero.jpg";
+import { ArrowUpRight } from "lucide-react";
 
 export default function Hero() {
   return (
-    <section className="relative bg-gradient-to-br from-gray-100 to-gray-300 py-24">
+    <section className="relative bg-gradient-to-br from-zinc-100 to-zinc-300 py-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between">
         {/* Left Content */}
         <motion.div
@@ -13,21 +14,23 @@ export default function Hero() {
           transition={{ duration: 1, ease: "easeInOut" }}
           className="max-w-xl text-center lg:text-left"
         >
-          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight text-gray-900">
-            Immerse Yourself in Sound
+          <h1 className="text-5xl md:text-6xl text-pretty font-extrabold tracking-tight text-gray-900">
+            Elevate Your Setup With Headers
           </h1>
           <p className="mt-6 text-xl text-gray-700">
-            Discover our premium collection of headphones. From noise-cancelling
-            to wireless, find your perfect audio companion.
+            Explore our premium collection of keyboards, mice, headphones, and
+            more. Whether you're gaming, working, or creating, find the perfect
+            gear to enhance your experience.
           </p>
           {/* CTA Buttons */}
           <div className="mt-10 flex gap-4 justify-center lg:justify-start">
-            <a href={`/products?catagory=headphones&filter=All`}>
+            <a href={`/products?category=All&filter=All`}>
               <Button
                 size="lg"
                 className="text-white shadow-lg bg-lime-500 hover:bg-lime-500/90"
               >
-                Shop Headphones
+                Shop Now
+                <ArrowUpRight />
               </Button>
             </a>
             <Button
@@ -35,7 +38,7 @@ export default function Hero() {
               variant="outline"
               className="border-gray-700 text-gray-900 hover:bg-gray-200"
             >
-              View Deals
+              Shop DLX Collection
             </Button>
           </div>
         </motion.div>
