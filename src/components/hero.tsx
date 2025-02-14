@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import HeroImg from "@/assets/headphone-hero.jpg";
+import HeroImg from "@/assets/headers-hero.jpg";
 import { ArrowUpRight } from "lucide-react";
 
 export default function Hero() {
@@ -14,10 +14,10 @@ export default function Hero() {
           transition={{ duration: 1, ease: "easeInOut" }}
           className="max-w-xl text-center lg:text-left"
         >
-          <h1 className="text-5xl md:text-6xl text-pretty font-extrabold tracking-tight text-gray-900">
+          <h1 className="text-5xl md:text-6xl text-pretty font-extrabold tracking-tight text-zinc-900">
             Elevate Your Setup With Headers
           </h1>
-          <p className="mt-6 text-xl text-gray-700">
+          <p className="mt-6 text-xl text-zinc-700">
             Explore our premium collection of keyboards, mice, headphones, and
             more. Whether you're gaming, working, or creating, find the perfect
             gear to enhance your experience.
@@ -36,7 +36,7 @@ export default function Hero() {
             <Button
               size="lg"
               variant="outline"
-              className="border-gray-700 text-gray-900 hover:bg-gray-200"
+              className="border-zinc-700 text-gray-900 hover:bg-gray-200"
             >
               Shop DLX Collection
             </Button>
@@ -44,13 +44,13 @@ export default function Hero() {
         </motion.div>
 
         {/* Right Image */}
-        <div className="hidden md:block">
+        <div className="hidden md:block max-h-[43rem] overflow-hidden rounded-lg">
           <img
             src={HeroImg.src}
             alt="Premium Headphones"
-            width={450}
-            height={600}
-            className="rounded-xl shadow-2xl"
+            width={500}
+            height={400}
+            className="shadow-2xl rounded-lg object-bottom"
             loading="eager"
           />
         </div>
