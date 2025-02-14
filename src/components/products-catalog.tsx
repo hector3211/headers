@@ -190,7 +190,7 @@ export default function Products() {
           setSelectedCategory(["All"]);
         } else {
           const updatedFilters = selectedCategory.filter(
-            (item) => item !== filter,
+            (item) => item !== filter
           );
           params.delete("filter"); // Clear all filters first
           updatedFilters.forEach((item) => params.append("filter", item));
@@ -271,10 +271,10 @@ export default function Products() {
                   variant={"outline"}
                   key={subCategory}
                   onClick={() => updateURL(activeMainCategory, subCategory)}
-                  className={`px-4 py-2 rounded-full whitespace-nowrap ${
+                  className={`mx-1 rounded-full whitespace-nowrap ${
                     selectedCategory.includes(subCategory)
                       ? "bg-lime-500  hover:bg-lime-500/90"
-                      : "bg-gray-200 text-black hover:bg-gray-300"
+                      : "hover:bg-gray-300"
                   }`}
                 >
                   {subCategory}
