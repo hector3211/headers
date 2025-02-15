@@ -57,7 +57,7 @@ export default function Nav() {
               <span
                 className={`text-4xl font-bold tracking-tighter text-primary`}
               >
-                Prod
+                Headers
               </span>
             </a>
             <div className="hidden md:block ml-10 mt-2">

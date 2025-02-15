@@ -36,7 +36,7 @@ export default function Footer() {
           <div className="col-span-1 md:col-span-2">
             <a href="/" className="flex items-center mb-4">
               <Headphones className="h-8 w-8 mr-2 text-white" />
-              <span className="text-2xl font-bold">Prod</span>
+              <span className="text-2xl font-bold">Headers</span>
             </a>
             <p className="text-sm text-gray-300">
               Discover the perfect sound with our premium headphones. Immerse
@@ -113,7 +113,7 @@ export default function Footer() {
             </a>
           </div>
           <div className="text-sm text-gray-400">
-            <p>&copy; 2025 Prod. All rights reserved.</p>
+            <p>&copy; 2025 Headers. All rights reserved.</p>
             <p className="mt-1">
               Built by{" "}
               <a
