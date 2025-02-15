@@ -44,7 +44,7 @@ export default function Nav() {
 
   return (
     <nav
-      className={`fixed w-full transition-all duration-300 z-10 ${
+      className={`fixed w-full transition-all duration-300 z-50 ${
         isScrolled
           ? "bg-white shadow-sm bg-opacity-90 backdrop-blur-sm"
           : "bg-transparent"
