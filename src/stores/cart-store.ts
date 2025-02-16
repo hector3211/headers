@@ -30,7 +30,7 @@ export function addItemToCart(product: CartItem) {
 
   if (existingItem) {
     const updatedCart = currentCart.map((item) =>
-      item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item,
+      item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
     );
     shoppingCart.set(updatedCart);
     return;
@@ -46,7 +46,7 @@ export function removeItemFromCart(id: string) {
   if (existingItem) {
     if (existingItem.quantity > 1) {
       const updatedCart = currentCart.map((item) =>
-        item.id === id ? { ...item, quantity: item.quantity - 1 } : item,
+        item.id === id ? { ...item, quantity: item.quantity - 1 } : item
       );
       shoppingCart.set(updatedCart);
       return;

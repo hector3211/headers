@@ -26,14 +26,14 @@ export default function ShoppingCart() {
 
   const subtotal = $cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
-    0,
+    0
   );
   const tax = subtotal * 0.1; // Assuming 10% tax
   const total = subtotal + tax;
 
   return (
-    <div className="container mx-auto p-4 pt-20">
-      <h1 className="text-3xl font-bold mb-6">Shopping Cart</h1>
+    <div className=" container mx-auto p-4 pt-20 min-h-[calc(100vh-0rem)]">
+      <h1 className="mt-24 text-3xl font-bold mb-6">Shopping Cart</h1>
       <div className="grid gap-6 md:grid-cols-3">
         <Card className="md:col-span-2">
           <CardHeader>

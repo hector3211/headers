@@ -14,7 +14,7 @@ export default function AddToCartButton({ product }: Props) {
     toast.success("Successfully added to cart");
   }
   return (
-    <Button size={"icon"} onClick={handleClick}>
+    <Button size={"icon"} onClick={handleClick} className="mt-2">
       <Plus />
     </Button>
   );

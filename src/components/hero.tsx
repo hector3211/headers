@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function Hero() {
   return (
-    <div className="relative bg-gradient-to-br from-zinc-100 to-zinc-300 py-24 flex items-center">
+    <div className="relative bg-gradient-to-br from-zinc-100 to-zinc-300 py-24 flex items-center min-h-[calc(100vh-3rem)]">
       <div className="container mx-auto px-6 lg:px-8 flex flex-col space-y-6 lg:flex-row lg:space-y-0 items-center justify-evenly">
         {/* Left Content */}
         <motion.div

@@ -6,58 +6,57 @@ import Featured from "@/components/featured.astro"
 import { Button } from '@/components/ui/button';
 import { MoveUpRight } from 'lucide-react';
 import { Image } from "astro:assets";
-import KeyOne from "@/assets/keyboard-one.jpg"
+import KeyBoard from "@/assets/keyboard.avif"
+import { Card, CardContent, CardFooter} from '@/components/ui/card';
+import MousePad from "@/assets/mouse-pad.avif"
+import HeadPhone from "@/assets/sen-headphones.avif"
 ---
 
 <Layout>
     <main>
         <Hero client:load/>
         <Featured/>
-        <div class="flex flex-col lg:flex-row mb-1">
-            <div class="hidden 2xl:flex relative min-h-[20rem] bg-zinc-300 border border-zinc-500 p-5">
-                <img src={"https://massdrop-s3.imgix.net/product-images/wobkey-rainy75-mechanical-keyboard/FP/UwmgPuM5TnuVIWVrgTfe_lite_black.jpg?auto=format&fm=jpg&fit=fill&w=820&h=547&bg=f0f0f0&dpr=1&chromasub=444&q=70"} alt={"index page image"} class={"relative mx-auto h-[36rem] z-10 w-full object-cover object-bottom lg:object-center"}/>
-                <div class="z-20 absolute top-[2%] left-[6%] xl:left-[5%] flex flex-col space-y-3">
-                    <span class="">
-                        <h1 class="text-[60px] font-extrabold drop-shadow-3xl ">DLX Collection</h1>
-                        <h3 class=" font-light">Check out our new DLX keyboards</h3>
-                    </span>
-                    <span class="flex items-center">
-                        <Button>
-                            Checkout Collection
-                        </Button>
-                    </span>
-                </div>
-            </div>
-            <div class="relative min-h-[20rem] lg:maw-w-xl bg-zinc-300 border border-zinc-500 p-5">
-                <Image width={1200} height={1200} src={KeyOne} alt={"index page image"} class={"h-[36rem] relative z-10 w-full"}/>
-                <div class="z-20 absolute top-[60%] left-[10%] flex flex-col space-y-3">
-                    <span>
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 py-16 gap-x-5 px-5">
+            <Card className='col-auto md:col-span-1'>
+                <CardContent className='p-5'>
+                    <Image src={MousePad} alt={"index page image"} class={"shadow-lg z-10 w-full"}/>
+                </CardContent>
+                <CardFooter className='flex flex-col space-y-3 items-start'>
+                            <h1 class="text-[60px] font-extrabold drop-shadow-3xl ">DLX Mousepads</h1>
+                            <h3 class=" font-light">Check out our new DLX keyboards</h3>
+                            <Button>
+                                DLX Mousepads
+                            <MoveUpRight/>
+                            </Button>
+                </CardFooter>
+            </Card>
+            <Card className='col-auto md:col-span-1'>
+                <CardContent className='p-5'>
+                    <Image src={KeyBoard} alt={"index page image"} class={"relative z-10 w-full shadow-lg"}/>
+                </CardContent>
+                <CardFooter className='flex flex-col space-y-3 items-center'>
                         <h1 class="text-[60px] font-extrabold">DLX keyboards</h1>
                         <h3 class="text-foreground/90 font-light">Check out our new DLX keyboards</h3>
-                    </span>
-                    <span class="flex items-center">
                         <Button>
-                            Shop DLX
+                            Shop DLX Keyboards
                             <MoveUpRight/>
                         </Button>
-                    </span>
-                </div>
-            </div>
-            <div class="relative min-h-[20rem] bg-zinc-300 border border-zinc-500 p-5">
-                <img src={"https://massdrop-s3.imgix.net/marketingContent/bAMFiIOFQyWZyr2l2kYg_X5XnpYMhSXqPMkqexjOs_standard_wh.jpg?auto=format&fm=jpg&fit=crop&q=70&dpr=1"} alt={"index page image"} class={"relative mx-auto h-[36rem] z-10 w-full object-cover object-bottom lg:object-center"}/>
-                <div class="z-20 absolute bottom-[6%] left-[6%] xl:left-[5%] 2xl:left-[5%] flex flex-col space-y-3">
-                    <span class="">
+                </CardFooter>
+            </Card>
+            <Card className='col-auto md:col-span-1'>
+                <CardContent className='p-5'>
+                    <Image src={HeadPhone} alt={"index page image"} class={"shadow-lg z-10 w-full"}/>
+                </CardContent>
+                <CardFooter className='flex flex-col space-y-3 items-end'>
                         <h1 class="text-[60px] font-extrabold drop-shadow-3xl ">DLX Collection</h1>
                         <h3 class=" font-light">Check out our new DLX keyboards</h3>
-                    </span>
-                    <span class="flex items-center">
                         <Button>
-                            Checkout Collection
+                            Checkout Headphones
+                            <MoveUpRight/>
                         </Button>
-                    </span>
-                </div>
-            </div>
+                </CardFooter>
+            </Card>
         </div>
-<Footer/>
+        <Footer/>
     </main>
 </Layout>

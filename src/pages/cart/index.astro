@@ -2,8 +2,10 @@
 
 import Layout from '@/layouts/Layout.astro';
 import ShoppingCart from "@/components/shopping-cart.tsx"
+import Footer from '@/components/footer';
 ---
 
 <Layout>
-    <ShoppingCart client:load/>
+        <ShoppingCart client:load/>
+    <Footer/>
 </Layout>

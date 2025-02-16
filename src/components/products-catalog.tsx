@@ -1,39 +1,34 @@
-"use client";
-
 import { useEffect, useState } from "react";
 import ProductCard from "@/components/product-card";
 import { Search } from "lucide-react";
-import HeadPhone from "@/assets/headphone-two.png";
+import HeadPhone from "@/assets/sen-headphones.avif";
+import HeadPhoneTwo from "@/assets/headphones-four.avif";
 import Cables from "@/assets/cables.avif";
+import Mouse from "@/assets/mouse.png";
+import MouseTwo from "@/assets/mouse-two.png";
 import MousePad from "@/assets/mousepad.avif";
+import MousePadTwo from "@/assets/mouse-pad.avif";
 import { Button } from "./ui/button";
 
 const categories = [
   {
     name: "All",
-    subCategories: [
-      "New",
-      "Sale",
-      "Wireless",
-      "Over-Ear",
-      "On-Ear",
-      "In-Ear",
-      "Mousepads",
-      "Mice",
-      "Mouseskates",
-    ],
+    categories: ["Headphones", "Accessories", "DLX", "Sale", "New"],
   },
   {
-    name: "headphone",
-    subCategories: ["Wireless", "Over-Ear", "On-Ear", "In-Ear"],
+    name: "Headphones",
+    category: "Headphones",
+    tags: ["Wireless", "Over-Ear", "On-Ear", "In-Ear", "Sale", "New"],
   },
   {
-    name: "cables",
-    subCategories: ["New", "Sale"],
+    name: "Accessories",
+    category: "Accessories",
+    subCategories: ["Keyboard", "Mousepads", "Mice", "Cables", "Sale", "New"],
   },
   {
-    name: "accessories",
-    subCategories: ["Mousepads", "Mice", "Mouseskates"],
+    name: "DLX",
+    category: "DLX",
+    subCategories: ["Keyboard", "Headphones", "Mousepads", "Mice"],
   },
 ];
 
@@ -42,7 +37,8 @@ const products = [
   {
     id: "1",
     name: "AudioPhile Pro",
-    category: "Over-Ear",
+    category: "DLX",
+    tags: ["Headphones", "New", "DLX"],
     price: 299.99,
     rating: 4,
     imageUrl: HeadPhone.src,
@@ -50,7 +46,8 @@ const products = [
   {
     id: "2",
     name: "BassBoost X",
-    category: "Over-Ear",
+    category: "Headphones",
+    tags: ["Headphones", "New"],
     price: 249.99,
     rating: 5,
     imageUrl: HeadPhone.src,
@@ -58,7 +55,8 @@ const products = [
   {
     id: "3",
     name: "ClearSound Air",
-    category: "In-Ear",
+    category: "Headphones",
+    tags: ["Headphones", "New"],
     price: 149.99,
     rating: 4,
     imageUrl: HeadPhone.src,
@@ -66,7 +64,8 @@ const products = [
   {
     id: "4",
     name: "SportsFit Elite",
-    category: "In-Ear",
+    category: "DLX",
+    tags: ["Headphones", "Sale", "DLX"],
     price: 179.99,
     rating: 3,
     imageUrl: HeadPhone.src,
@@ -74,41 +73,46 @@ const products = [
   {
     id: "5",
     name: "StudioMaster",
-    category: "On-Ear",
+    category: "Headphones",
+    tags: ["Headphones", "Sale"],
     price: 199.99,
     rating: 5,
-    imageUrl: HeadPhone.src,
+    imageUrl: HeadPhoneTwo.src,
   },
   {
     id: "6",
     name: "TravelComfort",
-    category: "On-Ear",
+    category: "Headphones",
+    tags: ["Headphones", "Sale"],
     price: 129.99,
     rating: 4,
-    imageUrl: HeadPhone.src,
+    imageUrl: HeadPhoneTwo.src,
   },
   {
     id: "7",
     name: "GamerX Pro",
-    category: "Wireless",
+    category: "Headphones",
+    tags: ["Headphones", "Sale"],
     price: 279.99,
     rating: 5,
-    imageUrl: HeadPhone.src,
+    imageUrl: HeadPhoneTwo.src,
   },
   {
     id: "8",
     name: "AudiophileWireless",
-    category: "In-Ear",
+    category: "DLX",
+    tags: ["Headphones", "New", "DLX"],
     price: 159.99,
     rating: 4,
-    imageUrl: HeadPhone.src,
+    imageUrl: HeadPhoneTwo.src,
   },
 
   // Cables
   {
     id: "9",
     name: "UltraFast USB-C",
-    category: "New",
+    category: "Accessories",
+    tags: ["Accessories", "New", "Cables"],
     price: 19.99,
     rating: 5,
     imageUrl: Cables.src,
@@ -116,7 +120,8 @@ const products = [
   {
     id: "10",
     name: "HDMI Pro 4K",
-    category: "New",
+    category: "Accessories",
+    tags: ["Accessories", "New", "Cables"],
     price: 29.99,
     rating: 4,
     imageUrl: Cables.src,
@@ -124,7 +129,7 @@ const products = [
   {
     id: "11",
     name: "Lightning Speed Cable",
-    category: "Sale",
+    tags: ["Accessories", "Sale", "Cables"],
     price: 24.99,
     rating: 4,
     imageUrl: Cables.src,
@@ -134,23 +139,35 @@ const products = [
   {
     id: "12",
     name: "ComfortMouse Pad XL",
-    category: "Mousepads",
+    category: "Accessories",
+    tags: ["Accessories", "Mousepads", "DLX"],
     price: 39.99,
     rating: 5,
-    imageUrl: MousePad.src,
+    imageUrl: MousePadTwo.src,
   },
   {
     id: "13",
-    name: "ErgoMouse Pro",
-    category: "Mice",
+    name: "Lamzu Thorn",
+    category: "DLX",
+    tags: ["Accessories", "Mice", "DLX"],
     price: 59.99,
     rating: 5,
-    imageUrl: MousePad.src,
+    imageUrl: Mouse.src,
   },
   {
     id: "14",
-    name: "Precision Mouse Skates",
-    category: "Mouseskates",
+    name: "Logitech G Pro",
+    category: "Accessories",
+    tags: ["Accessories", "Mice", "DLX"],
+    price: 59.99,
+    rating: 5,
+    imageUrl: MouseTwo.src,
+  },
+  {
+    id: "15",
+    name: "Precision Mousepad",
+    category: "DLX",
+    tags: ["Accessories", "Mousepads", "DLX"],
     price: 14.99,
     rating: 4,
     imageUrl: MousePad.src,
@@ -160,7 +177,7 @@ const products = [
 export default function Products() {
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [activeMainCategory, setActiveMainCategory] = useState("headphone");
+  const [activeMainCategory, setActiveMainCategory] = useState("All");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -180,7 +197,6 @@ export default function Products() {
   const updateURL = (mainCategory: string, filter: string = "All") => {
     const params = new URLSearchParams(window.location.search);
     const paramsSize = params.getAll("filter").length;
-    console.log(`size of params BEFORE: ${paramsSize}`);
 
     if (activeMainCategory === mainCategory) {
       // sub category
@@ -198,7 +214,6 @@ export default function Products() {
         }
         const newUrl = `${window.location.pathname}?${params.toString()}`;
         window.history.pushState({}, "", newUrl);
-        console.log(`size of params: ${paramsSize}`);
         return;
       }
     }
@@ -225,20 +240,23 @@ export default function Products() {
       .toLowerCase()
       .includes(searchTerm.toLowerCase());
 
-    const matchesMainCategory = categories
-      .find((cat) => cat.name === activeMainCategory)
-      ?.subCategories.includes(product.category);
+    // Ensure product has the active main category
+    const matchesMainCategory =
+      activeMainCategory === "All" || product.category === activeMainCategory;
 
+    // Check if product matches selected subcategory (or include all if "All" is selected)
     const matchesSubCategory =
       selectedCategory.includes("All") ||
-      selectedCategory.includes(product.category);
+      selectedCategory.some((sub) => product.tags.includes(sub));
 
     return matchesSearch && matchesMainCategory && matchesSubCategory;
   });
 
   const currentCategories =
-    categories.find((cat) => cat.name === activeMainCategory)?.subCategories ||
-    [];
+    activeMainCategory === "All"
+      ? categories[0].categories // For "All", show all subcategories from categories
+      : categories.find((cat) => cat.name === activeMainCategory)
+          ?.subCategories || [];
 
   return (
     <div className="container mx-auto px-4 py-8 pt-32">
@@ -265,21 +283,23 @@ export default function Products() {
               ))}
             </div>
             <div>
-              {currentCategories.map((subCategory) => (
-                <Button
-                  size={"sm"}
-                  variant={"outline"}
-                  key={subCategory}
-                  onClick={() => updateURL(activeMainCategory, subCategory)}
-                  className={`mx-1 rounded-full whitespace-nowrap ${
-                    selectedCategory.includes(subCategory)
-                      ? "bg-lime-500  hover:bg-lime-500/90"
-                      : "hover:bg-gray-300"
-                  }`}
-                >
-                  {subCategory}
-                </Button>
-              ))}
+              {currentCategories &&
+                currentCategories.length > 0 &&
+                currentCategories.map((subCategory) => (
+                  <Button
+                    size={"sm"}
+                    variant={"outline"}
+                    key={subCategory}
+                    onClick={() => updateURL(activeMainCategory, subCategory)}
+                    className={`mx-1 rounded-full whitespace-nowrap ${
+                      selectedCategory.includes(subCategory)
+                        ? "bg-lime-500  hover:bg-lime-500/90"
+                        : "hover:bg-gray-300"
+                    }`}
+                  >
+                    {subCategory}
+                  </Button>
+                ))}
             </div>
           </div>
         </div>
@@ -295,15 +315,24 @@ export default function Products() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
         {filteredProducts.map((product) => (
-          <ProductCard key={product.id} {...product} />
+          <ProductCard
+            key={product.id}
+            id={product.id}
+            name={product.name}
+            category={product.category}
+            tags={product.tags}
+            price={product.price}
+            rating={product.rating}
+            imageUrl={product.imageUrl}
+          />
         ))}
       </div>
 
       {filteredProducts.length === 0 && (
         <p className="text-center text-gray-600 mt-8">
-          No headphones found matching your criteria. {selectedCategory}
+          No products found matching your criteria.
         </p>
       )}
     </div>
