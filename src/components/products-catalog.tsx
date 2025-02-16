@@ -206,7 +206,7 @@ export default function Products() {
           setSelectedCategory(["All"]);
         } else {
           const updatedFilters = selectedCategory.filter(
-            (item) => item !== filter
+            (item) => item !== filter,
           );
           params.delete("filter"); // Clear all filters first
           updatedFilters.forEach((item) => params.append("filter", item));
