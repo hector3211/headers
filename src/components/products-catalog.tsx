@@ -18,7 +18,7 @@ const categories = [
   {
     name: "Headphones",
     category: "Headphones",
-    tags: ["Wireless", "Over-Ear", "On-Ear", "In-Ear", "Sale", "New"],
+    subCategories: ["Wireless", "Over-Ear", "On-Ear", "In-Ear", "Sale", "New"],
   },
   {
     name: "Accessories",
@@ -38,7 +38,7 @@ const products = [
     id: "1",
     name: "AudioPhile Pro",
     category: "DLX",
-    tags: ["Headphones", "New", "DLX"],
+    tags: ["Headphones", "Over-Ear", "New", "DLX"],
     price: 299.99,
     rating: 4,
     imageUrl: HeadPhone.src,
@@ -47,7 +47,7 @@ const products = [
     id: "2",
     name: "BassBoost X",
     category: "Headphones",
-    tags: ["Headphones", "New"],
+    tags: ["Headphones", "On-Ear", "New"],
     price: 249.99,
     rating: 5,
     imageUrl: HeadPhone.src,
@@ -56,7 +56,7 @@ const products = [
     id: "3",
     name: "ClearSound Air",
     category: "Headphones",
-    tags: ["Headphones", "New"],
+    tags: ["Headphones", "Wireless", "New"],
     price: 149.99,
     rating: 4,
     imageUrl: HeadPhone.src,
@@ -65,7 +65,7 @@ const products = [
     id: "4",
     name: "SportsFit Elite",
     category: "DLX",
-    tags: ["Headphones", "Sale", "DLX"],
+    tags: ["Headphones", "In-Ear", "Sale", "DLX"],
     price: 179.99,
     rating: 3,
     imageUrl: HeadPhone.src,
@@ -74,7 +74,7 @@ const products = [
     id: "5",
     name: "StudioMaster",
     category: "Headphones",
-    tags: ["Headphones", "Sale"],
+    tags: ["Headphones", "Over-Ear", "Sale"],
     price: 199.99,
     rating: 5,
     imageUrl: HeadPhoneTwo.src,
@@ -83,7 +83,7 @@ const products = [
     id: "6",
     name: "TravelComfort",
     category: "Headphones",
-    tags: ["Headphones", "Sale"],
+    tags: ["Headphones", "Wireless", "Sale"],
     price: 129.99,
     rating: 4,
     imageUrl: HeadPhoneTwo.src,
@@ -92,7 +92,7 @@ const products = [
     id: "7",
     name: "GamerX Pro",
     category: "Headphones",
-    tags: ["Headphones", "Sale"],
+    tags: ["Headphones", "On-Ear", "Sale"],
     price: 279.99,
     rating: 5,
     imageUrl: HeadPhoneTwo.src,
@@ -101,7 +101,7 @@ const products = [
     id: "8",
     name: "AudiophileWireless",
     category: "DLX",
-    tags: ["Headphones", "New", "DLX"],
+    tags: ["Headphones", "Over-Ear", "New", "DLX"],
     price: 159.99,
     rating: 4,
     imageUrl: HeadPhoneTwo.src,
@@ -129,6 +129,7 @@ const products = [
   {
     id: "11",
     name: "Lightning Speed Cable",
+    category: "Accessories",
     tags: ["Accessories", "Sale", "Cables"],
     price: 24.99,
     rating: 4,
@@ -206,7 +207,7 @@ export default function Products() {
           setSelectedCategory(["All"]);
         } else {
           const updatedFilters = selectedCategory.filter(
-            (item) => item !== filter,
+            (item) => item !== filter
           );
           params.delete("filter"); // Clear all filters first
           updatedFilters.forEach((item) => params.append("filter", item));

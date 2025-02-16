@@ -64,3 +64,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom Tailwind CSS to hide scrollbar */
+.scrollbar-hidden {
+  -ms-overflow-style: none; /* For Internet Explorer and Edge */
+  scrollbar-width: none; /* For Firefox */
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none; /* For Chrome, Safari, and Opera */
+}

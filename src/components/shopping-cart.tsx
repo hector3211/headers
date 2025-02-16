@@ -15,9 +15,64 @@ import {
   removeItemFromCart,
 } from "@/stores/cart-store";
 import { useStore } from "@nanostores/react";
+import Headphones from "@/assets/sen-headphones.avif";
+import HeadphonesTwo from "@/assets/headphones-four.avif";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef } from "react";
+
+const popularItems = [
+  {
+    id: "1",
+    name: "Wireless Headphones",
+    price: 99.99,
+    src: Headphones,
+  },
+  {
+    id: "2",
+    name: "Gaming Mouse",
+    price: 49.99,
+    src: HeadphonesTwo,
+  },
+  {
+    id: "3",
+    name: "Mechanical Keyboard",
+    price: 129.99,
+    src: Headphones,
+  },
+  {
+    id: "4",
+    name: "Mechanical Keyboard",
+    price: 129.99,
+    src: Headphones,
+  },
+  {
+    id: "5",
+    name: "Mechanical Keyboard",
+    price: 129.99,
+    src: Headphones,
+  },
+  {
+    id: "6",
+    name: "Mechanical Keyboard",
+    price: 129.99,
+    src: Headphones,
+  },
+];
 
 export default function ShoppingCart() {
   const $cartItems = useStore(shoppingCart);
+
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    if (scrollRef.current) {
+      const scrollAmount = 350; // Increased scroll step for better navigation
+      scrollRef.current.scrollBy({
+        left: direction === "left" ? -scrollAmount : scrollAmount,
+        behavior: "smooth",
+      });
+    }
+  };
 
   const updateQuantity = (id: string) => {
     const item = $cartItems.filter((item) => item.id === id);
@@ -28,12 +83,11 @@ export default function ShoppingCart() {
     (sum, item) => sum + item.price * item.quantity,
     0
   );
-  const tax = subtotal * 0.1; // Assuming 10% tax
+  const tax = subtotal * 0.07; // Assuming 7% tax
   const total = subtotal + tax;
 
   return (
-    <div className=" container mx-auto p-4 pt-20 min-h-[calc(100vh-0rem)]">
-      <h1 className="mt-24 text-3xl font-bold mb-6">Shopping Cart</h1>
+    <div className=" container mx-auto p-4 pt-40 min-h-[calc(100vh-0rem)]">
       <div className="grid gap-6 md:grid-cols-3">
         <Card className="md:col-span-2">
           <CardHeader>
@@ -116,7 +170,7 @@ export default function ShoppingCart() {
               <span>${subtotal.toFixed(2)}</span>
             </div>
             <div className="flex justify-between">
-              <span>Tax (10%)</span>
+              <span>Tax (7%)</span>
               <span>${tax.toFixed(2)}</span>
             </div>
             <Separator />
@@ -127,10 +181,55 @@ export default function ShoppingCart() {
           </CardContent>
           <CardFooter>
             <Button className="w-full" asChild>
-              <a href="/checkout">Proceed to Checkout</a>
+              <a href="/cart/checkout">Proceed to Checkout</a>
             </Button>
           </CardFooter>
         </Card>
+      </div>
+      {/* Popular Items Section */}
+      <div className="mt-10 relative">
+        <h2 className="text-2xl font-semibold mb-4">Popular Items</h2>
+
+        <Button
+          onClick={() => scroll("left")}
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-gray-200 hover:bg-gray-300 p-2 rounded-full shadow-md"
+        >
+          <ChevronLeft className="h-6 w-6 text-gray-600" />
+        </Button>
+
+        <div
+          ref={scrollRef}
+          className="px-3 flex space-x-3 overflow-x-scroll scroll-smooth snap-x max-w-full scrollbar-hidden"
+        >
+          {popularItems.map((item) => {
+            const imageUrl =
+              typeof item.src === "string" ? item.src : item.src.src;
+            return (
+              <Card key={item.id} className="min-w-[358px] flex flex-col">
+                <CardHeader>
+                  <img
+                    src={imageUrl}
+                    alt={item.name}
+                    className="w-full h-80 object-cover rounded-md"
+                  />
+                </CardHeader>
+                <CardContent className="flex-1">
+                  <h3 className="font-semibold">{item.name}</h3>
+                  <p className="text-gray-500">${item.price.toFixed(2)}</p>
+                </CardContent>
+                <CardFooter>
+                  <Button className="w-full">Add to Cart</Button>
+                </CardFooter>
+              </Card>
+            );
+          })}
+        </div>
+        <Button
+          onClick={() => scroll("right")}
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-gray-200 hover:bg-gray-300 p-2 rounded-full"
+        >
+          <ChevronRight className="h-6 w-6 text-gray-600" />
+        </Button>
       </div>
     </div>
   );
