@@ -1,8 +1,10 @@
 ---
 import Layout from '@/layouts/Layout.astro';
 import Hero from "@/components/hero.tsx"
-import Footer from "@/components/footer.tsx"
+import BrandScroller from "@/components/brand-banner.tsx"
 import Featured from "@/components/featured.astro"
+import Reviews from "@/components/reviews.astro"
+import Footer from "@/components/footer.tsx"
 import { Button } from '@/components/ui/button';
 import { MoveUpRight } from 'lucide-react';
 import { Image } from "astro:assets";
@@ -15,6 +17,7 @@ import HeadPhone from "@/assets/sen-headphones.avif"
 <Layout>
     <main>
         <Hero client:load/>
+        <!-- <BrandScroller client:load/> -->
         <Featured/>
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 py-16 gap-x-5 px-5">
             <Card className='col-auto md:col-span-1'>
@@ -24,39 +27,46 @@ import HeadPhone from "@/assets/sen-headphones.avif"
                 <CardFooter className='flex flex-col space-y-3 items-start'>
                             <h1 class="text-[60px] font-extrabold drop-shadow-3xl ">DLX Mousepads</h1>
                             <h3 class=" font-light">Check out our new DLX keyboards</h3>
+                    <a href={`/products?category=DLX&filter=Mousepads`}>
                             <Button>
                                 DLX Mousepads
                             <MoveUpRight/>
                             </Button>
-                </CardFooter>
-            </Card>
-            <Card className='col-auto md:col-span-1'>
-                <CardContent className='p-5'>
-                    <Image src={KeyBoard} alt={"index page image"} class={"relative z-10 w-full shadow-lg"}/>
-                </CardContent>
-                <CardFooter className='flex flex-col space-y-3 items-center'>
-                        <h1 class="text-[60px] font-extrabold">DLX keyboards</h1>
-                        <h3 class="text-foreground/90 font-light">Check out our new DLX keyboards</h3>
-                        <Button>
-                            Shop DLX Keyboards
-                            <MoveUpRight/>
-                        </Button>
+                    </a>
                 </CardFooter>
             </Card>
             <Card className='col-auto md:col-span-1'>
                 <CardContent className='p-5'>
                     <Image src={HeadPhone} alt={"index page image"} class={"shadow-lg z-10 w-full"}/>
                 </CardContent>
-                <CardFooter className='flex flex-col space-y-3 items-end'>
-                        <h1 class="text-[60px] font-extrabold drop-shadow-3xl ">DLX Collection</h1>
-                        <h3 class=" font-light">Check out our new DLX keyboards</h3>
+                <CardFooter className='flex flex-col space-y-3 items-center'>
+                    <h1 class="text-[60px] font-extrabold drop-shadow-3xl ">DLX Collection</h1>
+                    <h3 class=" font-light">Check out our new DLX keyboards</h3>
+                    <a href={`/products?category=DLX&filter=Headphones`}>
                         <Button>
                             Checkout Headphones
                             <MoveUpRight/>
                         </Button>
+                    </a>
+                </CardFooter>
+            </Card>
+            <Card className='col-auto md:col-span-2 xl:col-span-1 '>
+                <CardContent className='p-5'>
+                    <Image src={KeyBoard} alt={"index page image"} class={"relative z-10 w-full shadow-lg"}/>
+                </CardContent>
+                <CardFooter className='flex flex-col space-y-3 items-end'>
+                        <h1 class="text-[60px] font-extrabold">DLX keyboards</h1>
+                        <h3 class="text-foreground/90 font-light">Check out our new DLX keyboards</h3>
+                    <a href={`/products?category=DLX&filter=Keyboards`}>
+                        <Button>
+                            Shop DLX Keyboards
+                            <MoveUpRight/>
+                        </Button>
+                    </a>
                 </CardFooter>
             </Card>
         </div>
+<Reviews/>
         <Footer/>
     </main>
 </Layout>

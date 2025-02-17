@@ -61,11 +61,11 @@ const products: Product[] = [
 ]
 ---
 
-<section class="bg-zinc-100 py-16 min-h-[28rem]">
+<div class="bg-zinc-100 py-16 min-h-[28rem]">
     <h2 class="text-[55px] text-center font-extrabold text-zinc-900 mb-6 text-pretty tracking-tight">Featured</h2>
-        <div class="flex flex-col md:flex-row md:flex-wrap justify-center items-center">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-y-2 md:gap-x-2 lg:grid-cols-3 container mx-auto">
           {products.map((product) => (
-          <Card className="rounded-none bg-zinc-100 max-w-sm mx-auto">
+          <Card className="col-span-1 rounded-none bg-zinc-100 max-w-sm mx-auto">
                 <CardContent className="min-h-[8rem] p-5">
                     <Image src={product.src as ImageMetadata} alt={product.name} width={900} height={900} class="w-full h-56" />
                 </CardContent>
@@ -79,4 +79,4 @@ const products: Product[] = [
             </Card>
           ))}
       </div>
-    </section>
+    </div>

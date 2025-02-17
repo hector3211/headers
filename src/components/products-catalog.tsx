@@ -23,12 +23,12 @@ const categories = [
   {
     name: "Accessories",
     category: "Accessories",
-    subCategories: ["Keyboard", "Mousepads", "Mice", "Cables", "Sale", "New"],
+    subCategories: ["Keyboards", "Mousepads", "Mice", "Cables", "Sale", "New"],
   },
   {
     name: "DLX",
     category: "DLX",
-    subCategories: ["Keyboard", "Headphones", "Mousepads", "Mice"],
+    subCategories: ["Keyboards", "Headphones", "Mousepads", "Mice"],
   },
 ];
 

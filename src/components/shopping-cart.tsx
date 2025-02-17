@@ -6,6 +6,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Minus, Plus, Trash2 } from "lucide-react";
@@ -17,7 +24,6 @@ import {
 import { useStore } from "@nanostores/react";
 import Headphones from "@/assets/sen-headphones.avif";
 import HeadphonesTwo from "@/assets/headphones-four.avif";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef } from "react";
 
 const popularItems = [
@@ -186,51 +192,45 @@ export default function ShoppingCart() {
           </CardFooter>
         </Card>
       </div>
-      {/* Popular Items Section */}
-      <div className="mt-10 relative">
-        <h2 className="text-2xl font-semibold mb-4">Popular Items</h2>
-
-        <Button
-          onClick={() => scroll("left")}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-gray-200 hover:bg-gray-300 p-2 rounded-full shadow-md"
-        >
-          <ChevronLeft className="h-6 w-6 text-gray-600" />
-        </Button>
-
-        <div
-          ref={scrollRef}
-          className="px-3 flex space-x-3 overflow-x-scroll scroll-smooth snap-x max-w-full scrollbar-hidden"
-        >
-          {popularItems.map((item) => {
+      <Carousel className="container mx-auto py-10">
+        <CarouselContent className="-ml-1">
+          {popularItems.map((item, index) => {
             const imageUrl =
               typeof item.src === "string" ? item.src : item.src.src;
             return (
-              <Card key={item.id} className="min-w-[358px] flex flex-col">
-                <CardHeader>
-                  <img
-                    src={imageUrl}
-                    alt={item.name}
-                    className="w-full h-80 object-cover rounded-md"
-                  />
-                </CardHeader>
-                <CardContent className="flex-1">
-                  <h3 className="font-semibold">{item.name}</h3>
-                  <p className="text-gray-500">${item.price.toFixed(2)}</p>
-                </CardContent>
-                <CardFooter>
-                  <Button className="w-full">Add to Cart</Button>
-                </CardFooter>
-              </Card>
+              <CarouselItem
+                key={index}
+                className="pl-1 md:basis-1/2 lg:basis-1/3"
+              >
+                <div className="p-1">
+                  <Card>
+                    <CardContent className="flex flex-col aspect-square items-center justify-center p-6">
+                      <img
+                        src={imageUrl}
+                        alt={item.name}
+                        className="object-cover w-full rounded-md"
+                      />
+                      <span className="flex flex-col items-start justify-start w-full mt-5">
+                        <h1 className="text-xl font-semibold text-gray-800 mb-1">
+                          {item.name}
+                        </h1>
+                        <h3 className="text-sm text-gray-600 mb-2">
+                          ${item.price}
+                        </h3>
+                      </span>
+                    </CardContent>
+                    <CardFooter>
+                      <Button className="w-full">Add to Cart</Button>
+                    </CardFooter>
+                  </Card>
+                </div>
+              </CarouselItem>
             );
           })}
-        </div>
-        <Button
-          onClick={() => scroll("right")}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-gray-200 hover:bg-gray-300 p-2 rounded-full"
-        >
-          <ChevronRight className="h-6 w-6 text-gray-600" />
-        </Button>
-      </div>
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
     </div>
   );
 }

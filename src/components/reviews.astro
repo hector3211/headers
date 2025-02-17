@@ -1,0 +1,57 @@
+---
+import { Image } from "astro:assets";
+import { Star } from 'lucide-astro'
+import ReviewOne from "@/assets/headers-review.jpg"
+import ReviewTwo from "@/assets/headers-review-two.jpg"
+import ReviewThree from "@/assets/headers-review-three.jpg"
+const reviews = [
+  {
+    id: 1,
+    name: "Jess Johnson",
+    avatar: ReviewOne,
+    review: "These headphones are amazing! The sound quality is top-notch and they're so comfortable.",
+    rating: 5,
+    product: "Noise-Cancelling Wireless Headphones"
+  },
+  {
+    id: 2,
+    name: "Sam Lee",
+    avatar: ReviewTwo,
+    review: "Great for workouts. They stay in place and the sound motivates me to push harder.",
+    rating: 4,
+    product: "Sports In-Ear Headphones"
+  },
+  {
+    id: 3,
+    name: "Emily Chen",
+    avatar: ReviewThree,
+    review: "The studio quality is unmatched. Perfect for my home recording sessions.",
+    rating: 5,
+    product: "Studio-Quality Over-Ear Headphones"
+  }
+]
+---
+<div class="bg-zinc-100 py-16 min-h-[28rem] sm:px-4 xl:px-0">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-2 lg:gap-4">
+            {reviews.map((review) => (
+            <div class="bg-gray-50 rounded-lg p-6 shadow-sm">
+                <div class="flex items-center mb-4">
+                    <Image src={review.avatar} alt={review.name} width={60} height={60} class="rounded-full mr-4" />
+                    <div>
+                        <h3 class="font-semibold text-lg">{review.name}</h3>
+                        <div class="flex">
+                            {[...Array(5)].map((_, i) => (
+                            <Star class={`h-5 w-5 ${i < review.rating ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" />
+                            ))}
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray-600 mb-2">"{review.review}"</p>
+                <p class="text-sm text-gray-500">on {review.product}</p>
+            </div>
+            ))}
+        </div>
+    </div>
+</div>
+

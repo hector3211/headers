@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import HeroImg from "@/assets/heders-hero.jpg";
+import HeroImg from "@/assets/headers-final.jpg";
 import { ArrowUpRight } from "lucide-react";
 
 export default function Hero() {
   return (
-    <div className="relative bg-gradient-to-br from-zinc-100 to-zinc-300 py-24 flex items-center min-h-[calc(100vh-3rem)]">
+    <div className="pt-40 relative bg-gradient-to-br from-zinc-100 to-zinc-300 md:pt-0 py-24 flex items-center min-h-[calc(100vh-3rem)]">
       <div className="container mx-auto px-6 lg:px-8 flex flex-col space-y-6 lg:flex-row lg:space-y-0 items-center justify-evenly">
         {/* Left Content */}
         <motion.div
@@ -33,13 +33,15 @@ export default function Hero() {
                 <ArrowUpRight />
               </Button>
             </a>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-zinc-700 text-gray-900 hover:bg-gray-200"
-            >
-              Shop DLX Collection
-            </Button>
+            <a href={`/products?category=DLX&filter=All`}>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-zinc-700 text-gray-900 hover:bg-gray-200"
+              >
+                Shop DLX Collection
+              </Button>
+            </a>
           </div>
         </motion.div>
 
