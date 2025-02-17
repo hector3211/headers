@@ -82,22 +82,14 @@ export default function Nav() {
               </div>
             </div>
           </div>
-          <div className="flex items-center">
-            <Button
-              variant="ghost"
-              size="icon"
-              className={`mr-2 ${isScrolled ? "text-zinc-600" : ""}`}
-            >
-              <User className="h-5 w-5" />
-              <span className="sr-only">User account</span>
+          <div className="flex items-center gap-x-4">
+            <Button size="sm" variant={"secondary"}>
+              <User />
+              profile
             </Button>
             <a href="/cart">
-              <Button
-                variant="ghost"
-                size="icon"
-                className={isScrolled ? "text-zinc-600" : ""}
-              >
-                <ShoppingCart className="size-5" />
+              <Button size="sm" variant={"secondary"}>
+                <ShoppingCart />
                 <span
                   className={`size-4 ${
                     $cartItems.length && "text-destructive"

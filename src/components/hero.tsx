@@ -5,14 +5,14 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function Hero() {
   return (
-    <div className="pt-40 relative bg-gradient-to-br from-zinc-100 to-zinc-300 md:pt-0 py-24 flex items-center min-h-[calc(100vh-3rem)]">
-      <div className="container mx-auto px-6 lg:px-8 flex flex-col space-y-6 lg:flex-row lg:space-y-0 items-center justify-evenly lg:mt-24 2xl:mt-0">
+    <div className="pt-40 relative bg-gradient-to-br from-zinc-100 to-zinc-300 md:pt-0 flex items-center min-h-[calc(100vh-3rem)]">
+      <div className="w-full flex flex-col lg:flex-row items-center justify-between min-h-screen">
         {/* Left Content */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, ease: "easeInOut" }}
-          className="max-w-md xl:max-w-xl text-center lg:text-left"
+          className="max-w-md xl:max-w-2xl pl-[7%] text-center lg:text-left"
         >
           <h1 className="text-5xl xl:text-6xl text-pretty font-extrabold tracking-tight text-zinc-900">
             Elevate Your Workstation Gear
@@ -45,14 +45,12 @@ export default function Hero() {
           </div>
         </motion.div>
 
-        {/* Right Image */}
-        <div className=" h-[43rem] overflow-hidden rounded-2xl">
+        {/* Right Image - Full Height */}
+        <div className="hidden lg:block container ml-[8%] h-screen overflow-hidden">
           <img
             src={HeroImg.src}
             alt="Premium Headphones"
-            width={500}
-            height={400}
-            className=" shadow-2xl object-contain rounded-2xl object-bottom"
+            className="w-full h-full object-cover object-center shadow-2xl"
             loading="eager"
           />
         </div>
