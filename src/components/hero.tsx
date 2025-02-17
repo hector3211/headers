@@ -6,7 +6,7 @@ import { ArrowUpRight } from "lucide-react";
 export default function Hero() {
   return (
     <div className="pt-40 relative bg-gradient-to-br from-zinc-100 to-zinc-300 md:pt-0 py-24 flex items-center min-h-[calc(100vh-3rem)]">
-      <div className="container mx-auto px-6 lg:px-8 flex flex-col space-y-6 lg:flex-row lg:space-y-0 items-center justify-evenly">
+      <div className="container mx-auto px-6 lg:px-8 flex flex-col space-y-6 lg:flex-row lg:space-y-0 items-center justify-evenly lg:mt-24 2xl:mt-0">
         {/* Left Content */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
@@ -46,7 +46,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Right Image */}
-        <div className="h-[43rem] overflow-hidden rounded-2xl">
+        <div className=" h-[43rem] overflow-hidden rounded-2xl">
           <img
             src={HeroImg.src}
             alt="Premium Headphones"
